@@ -22,8 +22,8 @@ authorization.header = paste0("Bearer ", token)
 weekly.top.songs = read_html("https://spotifycharts.com/regional/global/weekly/latest") %>%
   html_nodes("#content > div > div > div > span > table > tbody > tr > td.chart-table-image > a")
 
-id.start = regexpr("/track/", weekly.top.songs) # seems to always be 7
-id.end = regexpr('" target="', weekly.top.songs) # seems to always be 63
+id.start = regexpr("/track/", weekly.top.songs) 
+id.end = regexpr('" target="', weekly.top.songs) 
 
 top.song.ids = substr(weekly.top.songs, id.start+7, id.end-1)
 
@@ -53,6 +53,9 @@ features.df = cbind(rank = 1:200, rank.desc = 200:1, danceability = features.con
 
 features.df = features.df %>% as.data.frame
 
+for (i in 1:ncol(features.df)) {
+  features.df[i,] = unlist(features.df[i])
+}
 
 head(features.df)
 
