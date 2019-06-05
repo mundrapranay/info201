@@ -29,10 +29,8 @@ server <- function(input, output) {
   
   output$barGraph <- renderPlot({
     ggplot(data_subset(), aes(x = data_subset()$rank, y=data_subset()$danceability)
-           , fill=x) + geom_bar(stat="identity") + 
-      labs(title="Danceability", x ="Song Ranks", y = "Score", 
-           caption = paste("Selected subset contains", 
-                           input$range[2]-input$range[1], "observations", sep=" ")) +
+           , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
+      labs(title="Danceability", x ="Song Ranks", y = "Score") +
       theme(
         plot.title = element_text(color = "black", size = 20, face = "bold"),
         plot.caption = element_text(color = "black", size = 12, face = "italic"),
@@ -50,10 +48,8 @@ server <- function(input, output) {
   
   output$barGraph2 <- renderPlot({
     ggplot(data_subset(), aes(x = data_subset()$rank, y=data_subset()$valence)
-           , fill=x) + geom_bar(stat="identity") + 
-      labs(title="Valence", x ="Song Ranks", y = "Score", 
-           caption = paste("Selected subset contains", 
-                           input$range[2]-input$range[1], "observations", sep=" ")) +
+           , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
+      labs(title="Valence", x ="Song Ranks", y = "Score") +
       theme(
         plot.title = element_text(color = "black", size = 20, face = "bold"),
         plot.caption = element_text(color = "black", size = 12, face = "italic"),
@@ -70,10 +66,8 @@ server <- function(input, output) {
   
   output$barGraph3 <- renderPlot({
     ggplot(data_subset(), aes(x = data_subset()$rank, y=data_subset()$energy)
-           , fill=x) + geom_bar(stat="identity") + 
-      labs(title="Energy", x ="Song Ranks", y = "Score", 
-           caption = paste("Selected subset contains", 
-                           input$range[2]-input$range[1], "observations", sep=" ")) +
+           , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
+      labs(title="Energy", x ="Song Ranks", y = "Score") +
       theme(
         plot.title = element_text(color = "black", size = 20, face = "bold"),
         plot.caption = element_text(color = "black", size = 12, face = "italic"),
@@ -91,7 +85,7 @@ server <- function(input, output) {
   
   output$barGraph4 <- renderPlot({
     ggplot(data_subset(), aes(x = data_subset()$rank, y=data_subset()$tempo)
-           , fill=x) + geom_bar(stat="identity") + 
+           , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
       labs(title="Tempo", x ="Song Ranks", y = "Score", 
            caption = paste("Selected subset contains", 
                            input$range[2]-input$range[1], "observations", sep=" ")) +
@@ -114,5 +108,6 @@ server <- function(input, output) {
                pcol=rgb(0.3,0.6,0.8,0.8),pfcol=rgb(0.3,0.6,0.8,0.8), 
                cglcol=rgb(0.6,0.6,0.6), cglty=1,axislabcol=rgb(0.6,0.6,0.6))
   })
+  
 }
 
