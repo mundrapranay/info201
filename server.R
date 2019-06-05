@@ -7,7 +7,7 @@ library(fmsb)
 
 data <-read.csv("./data/global_top_50_song_audio_features.csv")
 
-shinyServer(function(input, output) {
+server <- function(input, output) {
   data_subset <- reactive({
       partial_data <- data[input$range[1]:input$range[2],]
   })
@@ -109,5 +109,83 @@ shinyServer(function(input, output) {
                cglcol=rgb(0.6,0.6,0.6), cglty=1,axislabcol=rgb(0.6,0.6,0.6))
   })
   
-})
+  other_sub <- reactive({
+    pd <- data[input$range2[1]:input$range2[2],]
+  })
+  
+  output$scatterplot1 <- renderPlot({
+    ggplot(other_sub(), aes(x = other_sub()$rank, y=other_sub()$liveness)
+           , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
+      labs(title="Liveness", x ="Song Ranks", y = "Liveness") +
+      theme(
+        plot.title = element_text(color = "black", size = 20, face = "bold"),
+        plot.caption = element_text(color = "black", size = 12, face = "italic"),
+        axis.text.x = element_text(color = "black", size = 12, angle = 60,
+                                   hjust = 1.1, vjust = 1),
+        axis.text.y = element_text(color = "black", size = 12, angle = 0,
+                                   hjust = 1, vjust = 0),  
+        axis.title.x = element_text(color = "black", size = 18, angle = 0, 
+                                    hjust = .5, vjust = 0),
+        axis.title.y = element_text(color = "black", size = 18, angle = 90, 
+                                    hjust = .5, vjust = .5)
+      )
+    
+  })
+  
+  output$scatterplot2 <- renderPlot({
+    ggplot(other_sub(), aes(x = other_sub()$rank, y=other_sub()$duration_ms)
+           , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
+      labs(title="Length", x ="Song Ranks", y = "Length") +
+      theme(
+        plot.title = element_text(color = "black", size = 20, face = "bold"),
+        plot.caption = element_text(color = "black", size = 12, face = "italic"),
+        axis.text.x = element_text(color = "black", size = 12, angle = 60,
+                                   hjust = 1.1, vjust = 1),
+        axis.text.y = element_text(color = "black", size = 12, angle = 0,
+                                   hjust = 1, vjust = 0),  
+        axis.title.x = element_text(color = "black", size = 18, angle = 0, 
+                                    hjust = .5, vjust = 0),
+        axis.title.y = element_text(color = "black", size = 18, angle = 90, 
+                                    hjust = .5, vjust = .5)
+      )
+  })
+  
+  output$scatterplot3 <- renderPlot({
+    ggplot(other_sub(), aes(x = other_sub()$rank, y=other_sub()$loudness)
+           , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
+      labs(title="Loudness", x ="Song Ranks", y = "Loudness") +
+      theme(
+        plot.title = element_text(color = "black", size = 20, face = "bold"),
+        plot.caption = element_text(color = "black", size = 12, face = "italic"),
+        axis.text.x = element_text(color = "black", size = 12, angle = 60,
+                                   hjust = 1.1, vjust = 1),
+        axis.text.y = element_text(color = "black", size = 12, angle = 0,
+                                   hjust = 1, vjust = 0),  
+        axis.title.x = element_text(color = "black", size = 18, angle = 0, 
+                                    hjust = .5, vjust = 0),
+        axis.title.y = element_text(color = "black", size = 18, angle = 90, 
+                                    hjust = .5, vjust = .5)
+      )
+    
+  })
+  
+  output$scatterplot4 <- renderPlot({
+    ggplot(other_sub(), aes(x = other_sub()$rank, y=other_sub()$speechiness)
+           , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
+      labs(title="Speechiness", x ="Song Ranks", y = "Speechiness") +
+      theme(
+        plot.title = element_text(color = "black", size = 20, face = "bold"),
+        plot.caption = element_text(color = "black", size = 12, face = "italic"),
+        axis.text.x = element_text(color = "black", size = 12, angle = 60,
+                                   hjust = 1.1, vjust = 1),
+        axis.text.y = element_text(color = "black", size = 12, angle = 0,
+                                   hjust = 1, vjust = 0),  
+        axis.title.x = element_text(color = "black", size = 18, angle = 0, 
+                                    hjust = .5, vjust = 0),
+        axis.title.y = element_text(color = "black", size = 18, angle = 90, 
+                                    hjust = .5, vjust = .5)
+      )
+  })
+  
+}
 
