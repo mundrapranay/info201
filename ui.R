@@ -62,15 +62,7 @@ ui <- fluidPage(
                       ),
                       mainPanel("mainpanel2",
                                 plotOutput("radarChart"))
-             )#,
-#             tabPanel("World Analysis",
- #                     sidebarPanel(
-  #                      selectInput("songfactor", label = h3("Select an audio factor to explore:"),
-   #                                 choices = c("Danceability", "Valence", "Energy", "Acousticness", "Speechiness", "Tempo",
-    #                                            "Duration", "Time Signature"))
-     #                   
-      #                )
-       #      )
+             )
 
     )
   
