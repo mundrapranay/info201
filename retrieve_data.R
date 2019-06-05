@@ -57,9 +57,15 @@ audio_features_content = sapply(1:50, function(n) {
 
 audio_features_matrix = t(audio_features_content)
 
-song_names <- tracks_df[,8]
+song_names <- tracks_df[,12]
+artist_names <- c()
+artist_column <- tracks_df[,2]
+for (n in 1:50) {
+  artist_names <- c(artist_names, artist_column[[n]][[1]]$name)
+}
 
-audio_features_df <- cbind(rank = 1:50, id = song_list[1:50], name = song_names[1:50], danceability = audio_features_matrix[,1], 
+audio_features_df <- cbind(rank = 1:50, id = song_list[1:50], name = song_names[1:50], 
+                           artist = artist_names[1:50], danceability = audio_features_matrix[,1], 
                            energy = audio_features_matrix[,2], key = audio_features_matrix[,3], 
                            loudness = audio_features_matrix[,4], mode = audio_features_matrix[,5],
                            speechiness = audio_features_matrix[,6], acousticness = audio_features_matrix[,7],
@@ -77,3 +83,6 @@ audio_features_df <- apply(audio_features_df,2,as.character)
 write.csv(tracks_df, "./data/global_top_50_song_data.csv")
 write.csv(audio_features_df, "./data/global_top_50_song_audio_features.csv")
 
+df<-subset(audio_features_df, select = c("danceability",	"energy","speechiness","acousticness", "valence"))
+new_df<- data.frame(stringsAsFactors = F)
+new_df<- rbind(df[2,],rep(0:5),rep(5:0))
