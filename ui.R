@@ -18,7 +18,7 @@ ui <- fluidPage(
                         sidebarPanel(
                           sliderInput("range", label = h3("Select Sample Size:"), 
                                       min = 1, max = nrow(data),value = c(20, 30), round = TRUE, step = 1),
-                          p("Danceability = describes how suitable a track is for dancing based on a combination
+                          p("Danceability = Describes how suitable a track is for dancing based on a combination
                             of musical elements including tempo, rhythm stability, beat strength, and 
                             overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.", 
                             style = "font-family: 'arial'; font-si16pt"),
@@ -26,7 +26,7 @@ ui <- fluidPage(
                             Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), 
                             while tracks with low valence sound more negative (e.g. sad, depressed, angry).", 
                             style = "font-family: 'arial'; font-si16pt"),
-                          p("Energy = a measure from 0.0 to 1.0 and represents a perceptual measure of 
+                          p("Energy = A measure from 0.0 to 1.0 and represents a perceptual measure of 
                             intensity and activity. Typically, energetic tracks feel fast, loud, and noisy.", 
                             style = "font-family: 'arial'; font-si16pt"),
                           p("Tempo = The overall estimated tempo of a track in beats per minute (BPM).", 
@@ -42,7 +42,7 @@ ui <- fluidPage(
                         selectInput("song", label = h3("Select song in the Top 50:"), 
                                     choices = name,
                                     selected = 1),
-                        p("Danceability = describes how suitable a track is for dancing based on a combination
+                        p("Danceability = Describes how suitable a track is for dancing based on a combination
                             of musical elements including tempo, rhythm stability, beat strength, and 
                             overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.", 
                           style = "font-family: 'arial'; font-si16pt"),
@@ -50,7 +50,7 @@ ui <- fluidPage(
                             Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), 
                             while tracks with low valence sound more negative (e.g. sad, depressed, angry).", 
                           style = "font-family: 'arial'; font-si16pt"),
-                        p("Energy = a measure from 0.0 to 1.0 and represents a perceptual measure of 
+                        p("Energy = A measure from 0.0 to 1.0 and represents a perceptual measure of 
                             intensity and activity. Typically, energetic tracks feel fast, loud, and noisy.", 
                           style = "font-family: 'arial'; font-si16pt"),
                         p("Acousticness = A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 
@@ -62,7 +62,15 @@ ui <- fluidPage(
                       ),
                       mainPanel("mainpanel2",
                                 plotOutput("radarChart"))
-             )
+             )#,
+#             tabPanel("World Analysis",
+ #                     sidebarPanel(
+  #                      selectInput("songfactor", label = h3("Select an audio factor to explore:"),
+   #                                 choices = c("Danceability", "Valence", "Energy", "Acousticness", "Speechiness", "Tempo",
+    #                                            "Duration", "Time Signature"))
+     #                   
+      #                )
+       #      )
 
     )
   
