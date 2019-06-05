@@ -2,6 +2,8 @@
 
 This project allows for a user to explore various audio features of songs as well as look at how these audio features are correlated to how well a song does (as rated by how high the song is on the top 50s playlist.)
 
+You can find the shiny app [here](https://github.com/mundrapranay/info201)
+
 ![Pic](./data/spotify.jpg)
 
 The audio factors that are explored are:
