@@ -58,4 +58,6 @@ for (i in 1:50) {
 
 View(tracks_df)
 
-write.csv(tracks_df, file = './data/global_top_50_data')
+tracks_df <- apply(tracks_df,2,as.character)
+
+write.csv(tracks_df, file = './data/global_top_50_data.csv')

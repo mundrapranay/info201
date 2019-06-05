@@ -53,6 +53,9 @@ features.df = cbind(rank = 1:200, rank.desc = 200:1, danceability = features.con
 
 features.df = features.df %>% as.data.frame
 
+for (i in 1:ncol(features.df)) {
+  features.df[i,] = unlist(features.df[i])
+}
 
 head(features.df)
 
