@@ -48,11 +48,20 @@ ui <- fluidPage(
              ## Makes scatterplots like above.
              tabPanel("Other Factors", sidebarLayout(
                sidebarPanel(
-                 selectInput("factor", label = h3("Select alternate factor to browse"),
-                             choices = c("Loudness", 'Liveness', 'Duration', 'Speechiness'), 
-                             selected = 1)
+                 sliderInput("range2", label = h3("Select Sample Size:"), 
+                             min = 1, max = nrow(data),value = c(20, 30), round = TRUE, step = 1),
+                 p("Loudness = Relative loudness of a given song", style = "font-family: 'arial'; font-si-16pt"),
+                 p("Speechiness = How much the song resembles normal speech/no instruments/music.", style = "font-family: 'arial'; font-si-16pt"),
+                 p("Length = How long the song is in milliseconds", style = "font-family: 'arial'; font-si-16pt"),
+                 p("Liveness = How lively the song feels", style = "font-family: 'arial'; font-si-16pt")
+                 
                ),
-               mainPanel("Summary Plots of Other Song Factors", plotOutput("scatterplots"))
+               
+               mainPanel("Summary of Other Factors from the Top 50",
+                         fluidRow(
+                           splitLayout(column(12,plotOutput("scatterplot1"), plotOutput("scatterplot2")), 
+                                       column(12,plotOutput("scatterplot3"), plotOutput("scatterplot4")))
+                         ))
              )),
              
              ## Allows the user to select a single song from a drop-down list of songs and look at
