@@ -9,10 +9,15 @@ name <- c("-", as.vector(paste(data$name, data$artist, sep=" by ")))
 
           
 ui <- fluidPage(
+  
+  ## Dark background with white text
   theme = shinytheme("darkly"),
   
-  
+  ## Title
   navbarPage("Audio Analysis of the Global Top 50 Songs on Spotify",
+             
+             ## First page; looks at main audio factors (danceability, energy, valence, and tempo).
+             ## Makes four scatterplots with lines of regression to show trends.
              tabPanel("Audio Factors Summary", 
                       sidebarLayout(
                         sidebarPanel(
@@ -37,6 +42,10 @@ ui <- fluidPage(
                                                    column(12,plotOutput("barGraph3"), plotOutput("barGraph4")))
                                      ))
                       )), 
+             
+             ## Other pertinent (or otherwise) factors affecting why a song might be on the 
+             ## Top fifty charts on Spotify. Looks at loudness, liveness, duration, and speechiness.
+             ## Makes scatterplots like above.
              tabPanel("Other Factors", sidebarLayout(
                sidebarPanel(
                  selectInput("factor", label = h3("Select alternate factor to browse"),
@@ -45,7 +54,11 @@ ui <- fluidPage(
                ),
                mainPanel("Summary Plots of Other Song Factors", plotOutput("scatterplots"))
              )),
-             tabPanel("Single Song", 
+             
+             ## Allows the user to select a single song from a drop-down list of songs and look at
+             ## five of its individual song statistics. Danceability, valence, energy, acousticness, and
+             ## speechiness.
+             tabPanel("Single Song Analyses", 
                       sidebarPanel(
                         selectInput("song", label = h3("Select song in the Top 50:"), 
                                     choices = name,
