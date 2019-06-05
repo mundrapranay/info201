@@ -20,3 +20,4 @@ response <- POST(
 token <- content(response)$access_token
 authorization.header <- paste0("Bearer ", token)
 
+# get the top artists and filter over their major keys and tempos and other audio features of the tracks
