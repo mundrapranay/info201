@@ -13,7 +13,7 @@ ui <- fluidPage(
   
   
   navbarPage("Audio Analysis of the Global Top 50 Songs on Spotify",
-             tabPanel("Summary", 
+             tabPanel("Audio Factors Summary", 
                       sidebarLayout(
                         sidebarPanel(
                           sliderInput("range", label = h3("Select Sample Size:"), 
@@ -37,6 +37,14 @@ ui <- fluidPage(
                                                    column(12,plotOutput("barGraph3"), plotOutput("barGraph4")))
                                      ))
                       )), 
+             tabPanel("Other Factors", sidebarLayout(
+               sidebarPanel(
+                 selectInput("factor", label = h3("Select alternate factor to browse"),
+                             choices = c("Loudness", 'Liveness', 'Duration', 'Speechiness'), 
+                             selected = 1)
+               ),
+               mainPanel("Summary Plots of Other Song Factors", plotOutput("scatterplots"))
+             )),
              tabPanel("Single Song", 
                       sidebarPanel(
                         selectInput("song", label = h3("Select song in the Top 50:"), 
@@ -60,7 +68,7 @@ ui <- fluidPage(
                           speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. ", 
                           style = "font-family: 'arial'; font-si16pt")
                       ),
-                      mainPanel("mainpanel2",
+                      mainPanel("Radar Charts of Song Audio Factors",
                                 plotOutput("radarChart"))
              )
 
