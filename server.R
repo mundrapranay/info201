@@ -7,7 +7,7 @@ library(fmsb)
 
 data <-read.csv("./data/global_top_50_song_audio_features.csv")
 
-server <- function(input, output) {
+shinyServer(function(input, output) {
   data_subset <- reactive({
       partial_data <- data[input$range[1]:input$range[2],]
   })
@@ -109,5 +109,5 @@ server <- function(input, output) {
                cglcol=rgb(0.6,0.6,0.6), cglty=1,axislabcol=rgb(0.6,0.6,0.6))
   })
   
-}
+})
 
