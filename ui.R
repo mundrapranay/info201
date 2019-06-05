@@ -8,11 +8,16 @@ ranks <- c("-", as.vector(data$rank))
 name <- c("-", as.vector(paste(data$name, data$artist, sep=" by ")))
 
           
-shinyUI(fluidPage(
+ui <- fluidPage(
+  
+  ## Dark background with white text
   theme = shinytheme("darkly"),
   
-  
+  ## Title
   navbarPage("Audio Analysis of the Global Top 50 Songs on Spotify",
+             
+             ## First page; looks at main audio factors (danceability, energy, valence, and tempo).
+             ## Makes four scatterplots with lines of regression to show trends.
              tabPanel("Audio Factors Summary", 
                       sidebarLayout(
                         sidebarPanel(
@@ -37,15 +42,32 @@ shinyUI(fluidPage(
                                                    column(12,plotOutput("barGraph3"), plotOutput("barGraph4")))
                                      ))
                       )), 
+             
+             ## Other pertinent (or otherwise) factors affecting why a song might be on the 
+             ## Top fifty charts on Spotify. Looks at loudness, liveness, duration, and speechiness.
+             ## Makes scatterplots like above.
              tabPanel("Other Factors", sidebarLayout(
                sidebarPanel(
-                 selectInput("factor", label = h3("Select alternate factor to browse"),
-                             choices = c("Loudness", 'Liveness', 'Duration', 'Speechiness'), 
-                             selected = 1)
+                 sliderInput("range2", label = h3("Select Sample Size:"), 
+                             min = 1, max = nrow(data),value = c(20, 30), round = TRUE, step = 1),
+                 p("Loudness = Relative loudness of a given song", style = "font-family: 'arial'; font-si-16pt"),
+                 p("Speechiness = How much the song resembles normal speech/no instruments/music.", style = "font-family: 'arial'; font-si-16pt"),
+                 p("Length = How long the song is in milliseconds", style = "font-family: 'arial'; font-si-16pt"),
+                 p("Liveness = How lively the song feels", style = "font-family: 'arial'; font-si-16pt")
+                 
                ),
-               mainPanel("Summary Plots of Other Song Factors", plotOutput("scatterplots"))
+               
+               mainPanel("Summary of Other Factors from the Top 50",
+                         fluidRow(
+                           splitLayout(column(12,plotOutput("scatterplot1"), plotOutput("scatterplot2")), 
+                                       column(12,plotOutput("scatterplot3"), plotOutput("scatterplot4")))
+                         ))
              )),
-             tabPanel("Single Song", 
+             
+             ## Allows the user to select a single song from a drop-down list of songs and look at
+             ## five of its individual song statistics. Danceability, valence, energy, acousticness, and
+             ## speechiness.
+             tabPanel("Single Song Analyses", 
                       sidebarPanel(
                         selectInput("song", label = h3("Select song in the Top 50:"), 
                                     choices = name,
@@ -74,6 +96,6 @@ shinyUI(fluidPage(
 
     )
   
-))
+)
 
 
