@@ -4,16 +4,15 @@ library(httr)
 library(tidyr)
 library(spotifyr)
 library(plyr)
+library(stringr)
 
-
-library(mapdata)
-world <- map_data('world')
+## THE DATA HERE MUST BE MANUALLY UPDATED BY GOING THROUGH THE CODE LINE BY LINE
+## THIS IS BECAUSE THE SERVER GETS OVERLOADED OR SOMETHING AND RETURNS GARBAGE 
+## INSTEAD OF ACTUAL LISTS/DATA!
 
 ## Associate the URL IDs with each of the names
 ## Use the names to plot the associated data
 ## Should be an easy merge
-
-z <- playlistGet('Canada')
 
 countries <- c("Argentina", "Australia", "Austria", "Belgium", "Bolivia", "Brazil", "Bulgaria", 
                "Canada", "Chile", "Colombia", "Costa Rica", "Czech Republic", "Denmark", 
@@ -183,6 +182,14 @@ songlistCompute('Mexico')
 songlistCompute('Netherlands')
 songlistCompute('New Zealand')
 songlistCompute('Nicaragua')
+songlistCompute('Norway')
+songlistCompute('Panama')
+songlistCompute('Paraguay')
+songlistCompute('Peru')
+songlistCompute('Philippines')
+songlistCompute('Poland')
+songlistCompute('Portugal')
+songlistCompute('Romania')
 songlistCompute('Singapore')
 songlistCompute('Slovakia')
 songlistCompute('South Africa')
