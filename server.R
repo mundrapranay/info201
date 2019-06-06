@@ -3,9 +3,13 @@ library(stringr)
 library(rsconnect)
 library(ggplot2)
 library(fmsb)
+library(maps)
+library(dplyr)
 
+world <- map_data('world')
 
 data <-read.csv("./data/global_top_50_song_audio_features.csv")
+source('./countryprocessing.R')
 
 server <- function(input, output) {
   data_subset <- reactive({
@@ -133,9 +137,9 @@ server <- function(input, output) {
   })
   
   output$scatterplot2 <- renderPlot({
-    ggplot(other_sub(), aes(x = other_sub()$rank, y=other_sub()$duration_ms)
+    ggplot(other_sub(), aes(x = other_sub()$rank, y=(other_sub()$duration_ms)/1000)
            , fill=x) + geom_point(stat="identity") + geom_smooth(method='lm') +
-      labs(title="Length", x ="Song Ranks", y = "Length") +
+      labs(title="Length", x ="Song Ranks", y = "Length (s)") +
       theme(
         plot.title = element_text(color = "black", size = 20, face = "bold"),
         plot.caption = element_text(color = "black", size = 12, face = "italic"),
@@ -185,6 +189,47 @@ server <- function(input, output) {
         axis.title.y = element_text(color = "black", size = 18, angle = 90, 
                                     hjust = .5, vjust = .5)
       )
+  })
+  
+  ## Currently just renders a standalone map.
+  
+  
+  output$worldmap <- renderPlot ({
+    
+    averages <- data.frame('region' = country_data$country, stringsAsFactors = FALSE)
+    averages$stat <- country_data$tempo
+    check <- input$factor
+    
+    print(input$factor)
+    
+    if(!(check == '-' || is.null(check))) {
+      if(check == 'Danceability') {
+        averages$stat <- country_data$danceability
+      } else if(check == 'Liveness') {
+        averages$stat <- country_data$liveness
+      } else if(check == 'Valence') {
+        averages$stat <- country_data$valence
+      } else if(check == 'Tempo') {
+        averages$stat <- country_data$tempo
+      } else if(check == 'Energy') {
+        averages$stat <- country_data$energy
+      } else if(check == 'Acousticness') {
+        averages$stat <- country_data$acousticness
+      } else if(check == 'Speechiness') {
+        averages$stat <- country_data$speechiness
+      } else {
+        averages$stat <- country_data$length
+      }
+      
+      world_graph <- left_join(averages, world, by = 'region')
+      
+      ggplot(world_graph, aes(x = long, y = lat, group = group)) +
+        geom_polygon(aes(fill = world_graph$stat))
+    } else {
+      ggplot(world_graph, aes(x = long, y = lat, group = group)) +
+        geom_polygon(fill = 'lightgray', color = 'white')
+    }
+    
   })
   
 }
