@@ -18,7 +18,7 @@ country_data <- data.frame('country' = countries, 'danceability' = NA, 'valence'
                            'liveness' = NA, stringsAsFactors = FALSE)
 
 for(var in countries) {
-  intermediatedf <- read.csv(str_c('./data/', var, '_top_50_song_audio_features.csv'))
+  intermediatedf <- read.csv(str_c('./data/', var, '_top_50_song_audio_features.csv'), fileEncoding = "latin1")
   
   danceability <- intermediatedf$danceability
   danceability <- mean(danceability)
