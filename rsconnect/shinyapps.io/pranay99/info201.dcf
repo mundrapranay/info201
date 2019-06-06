@@ -5,8 +5,8 @@ account: pranay99
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 967767
-bundleId: 2134799
+bundleId: 2136568
 url: https://pranay99.shinyapps.io/info201/
-when: 1559798753.39138
+when: 1559858703.0548
 asMultiple: FALSE
 asStatic: FALSE
