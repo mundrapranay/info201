@@ -3,9 +3,12 @@ library(stringr)
 library(rsconnect)
 library(ggplot2)
 library(fmsb)
+library(maps)
 
+world <- map_data('world')
 
 data <-read.csv("./data/global_top_50_song_audio_features.csv")
+source('./countryprocessing.R')
 
 server <- function(input, output) {
   data_subset <- reactive({
@@ -185,6 +188,13 @@ server <- function(input, output) {
         axis.title.y = element_text(color = "black", size = 18, angle = 90, 
                                     hjust = .5, vjust = .5)
       )
+  })
+  
+  ## Currently just renders a standalone map.
+  
+  output$worldmap <- renderPlot ({
+    ggplot(world, aes(x = long, y = lat, group = group)) +
+      geom_polygon(fill = 'lightgray', color = 'white')
   })
   
 }
