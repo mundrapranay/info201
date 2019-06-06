@@ -66,8 +66,8 @@ ui <- fluidPage(
              tabPanel("World Analyses", 
                       sidebarLayout( 
                         sidebarPanel(
-                          selectInput('country', label = h3("Select the factor you'd like to see global information for."),
-                                       choices = c("Danceability", "Valence", "Tempo", "Energy", "Acousticness", 
+                          selectInput('factor', label = h3("Select the factor you'd like to see global information for."),
+                                       choices = c("-", "Danceability", "Valence", "Tempo", "Energy", "Acousticness", 
                                                    "Speechiness", "Length", "Liveness"), selected = 1)
                           
                         ),

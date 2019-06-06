@@ -47,4 +47,6 @@ for(var in countries) {
   country_data[country_data$country == var,]$liveness <- liveness
 }
 
+country_data[country_data$country == 'United States',]$country <- 'USA'
+
 rm(intermediatedf)
