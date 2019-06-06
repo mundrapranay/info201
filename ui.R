@@ -63,16 +63,18 @@ ui <- fluidPage(
                                        column(12,plotOutput("scatterplot3"), plotOutput("scatterplot4")))
                          ))
              )),
-             tabPanel("World Analyses", 
-                      sidebarLayout( 
-                        sidebarPanel(
-                          selectInput('factor', label = h3("Select the factor you'd like to see global information for."),
-                                       choices = c("-", "Danceability", "Valence", "Tempo", "Energy", "Acousticness", 
-                                                   "Speechiness", "Length", "Liveness"), selected = 1)
-                          
-                        ),
-                        mainPanel("World Map", plotOutput("worldmap"))
-                      )
+             tabPanel("World Analyses",
+                      plotOutput('worldmap'),
+                      hr(),
+                      fluidRow(
+                        column(4,
+                               wellPanel(
+                                 selectInput('factor', label = h3("Select the factor you'd like to see global information for."),
+                                                         choices = c("-", "Danceability", "Valence", "Tempo", "Energy", "Acousticness", 
+                                                                     "Speechiness", "Length", "Liveness"), selected = 1)
+                               ))
+                      ),
+                      textOutput('worldanalysis')
                     ),
              ## Allows the user to select a single song from a drop-down list of songs and look at
              ## five of its individual song statistics. Danceability, valence, energy, acousticness, and
