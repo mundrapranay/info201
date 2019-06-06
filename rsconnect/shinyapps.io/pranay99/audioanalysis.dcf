@@ -1,0 +1,12 @@
+name: audioanalysis
+title: audioanalysis
+username:
+account: pranay99
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 968365
+bundleId: 2134805
+url: https://pranay99.shinyapps.io/audioanalysis/
+when: 1559798943.19599
+asMultiple: FALSE
+asStatic: FALSE
