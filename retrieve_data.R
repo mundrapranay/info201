@@ -6,8 +6,8 @@ library(spotifyr)
 library(plyr)
 
 
-clientID <- "d39d8c736e174cb18a58abec9ba00ec9"
-secret <- "40f864e7d87c49dcb0e55ed42ada4e7d"
+clientID <- ""
+secret <- ""
 
 response <- POST(
   'https://accounts.spotify.com/api/token',
